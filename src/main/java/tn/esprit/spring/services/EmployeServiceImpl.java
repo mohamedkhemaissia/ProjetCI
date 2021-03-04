@@ -1,35 +1,31 @@
 package tn.esprit.spring.services;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import tn.esprit.spring.entities.Contrat;
-import tn.esprit.spring.entities.Departement;
-import tn.esprit.spring.entities.Employe;
-import tn.esprit.spring.entities.Entreprise;
-import tn.esprit.spring.entities.Mission;
-import tn.esprit.spring.entities.Timesheet;
+import tn.esprit.spring.entities.*;
 import tn.esprit.spring.repository.ContratRepository;
 import tn.esprit.spring.repository.DepartementRepository;
 import tn.esprit.spring.repository.EmployeRepository;
 import tn.esprit.spring.repository.TimesheetRepository;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 @Service
 public class EmployeServiceImpl implements IEmployeService {
 
-	@Autowired
-	EmployeRepository employeRepository;
-	@Autowired
-	DepartementRepository deptRepoistory;
-	@Autowired
-	ContratRepository contratRepoistory;
-	@Autowired
-	TimesheetRepository timesheetRepository;
+	private final EmployeRepository employeRepository;
+	private final DepartementRepository deptRepoistory;
+	private final ContratRepository contratRepoistory;
+	private final TimesheetRepository timesheetRepository;
+
+	public EmployeServiceImpl(EmployeRepository employeRepository, DepartementRepository deptRepoistory, ContratRepository contratRepoistory, TimesheetRepository timesheetRepository) {
+		this.employeRepository = employeRepository;
+		this.deptRepoistory = deptRepoistory;
+		this.contratRepoistory = contratRepoistory;
+		this.timesheetRepository = timesheetRepository;
+	}
 
 	public int ajouterEmploye(Employe employe) {
 		employeRepository.save(employe);
@@ -43,7 +39,7 @@ public class EmployeServiceImpl implements IEmployeService {
 
 	}
 
-	@Transactional	
+	@Transactional
 	public void affecterEmployeADepartement(int employeId, int depId) {
 		Departement depManagedEntity = deptRepoistory.findById(depId).get();
 		Employe employeManagedEntity = employeRepository.findById(employeId).get();
@@ -85,7 +81,7 @@ public class EmployeServiceImpl implements IEmployeService {
 
 		contratManagedEntity.setEmploye(employeManagedEntity);
 		contratRepoistory.save(contratManagedEntity);
-		
+
 	}
 
 	public String getEmployePrenomById(int employeId) {
@@ -115,12 +111,12 @@ public class EmployeServiceImpl implements IEmployeService {
 	public int getNombreEmployeJPQL() {
 		return employeRepository.countemp();
 	}
-	
+
 	public List<String> getAllEmployeNamesJPQL() {
 		return employeRepository.employeNames();
 
 	}
-	
+
 	public List<Employe> getAllEmployeByEntreprise(Entreprise entreprise) {
 		return employeRepository.getAllEmployeByEntreprisec(entreprise);
 	}
@@ -132,7 +128,7 @@ public class EmployeServiceImpl implements IEmployeService {
 	public void deleteAllContratJPQL() {
          employeRepository.deleteAllContratJPQL();
 	}
-	
+
 	public float getSalaireByEmployeIdJPQL(int employeId) {
 		return employeRepository.getSalaireByEmployeIdJPQL(employeId);
 	}
@@ -140,7 +136,7 @@ public class EmployeServiceImpl implements IEmployeService {
 	public Double getSalaireMoyenByDepartementId(int departementId) {
 		return employeRepository.getSalaireMoyenByDepartementId(departementId);
 	}
-	
+
 	public List<Timesheet> getTimesheetsByMissionAndDate(Employe employe, Mission mission, Date dateDebut,
 			Date dateFin) {
 		return timesheetRepository.getTimesheetsByMissionAndDate(employe, mission, dateDebut, dateFin);

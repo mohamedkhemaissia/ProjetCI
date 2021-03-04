@@ -21,9 +21,8 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 		this.enterpriseRepository = enterpriseRepository;
 	}
 
-	public int ajouterEntreprise(Entreprise entreprise) {
+	public void ajouterEntreprise(Entreprise entreprise) {
 		enterpriseRepository.save(entreprise);
-		return entreprise.getId();
 	}
 
 	public int ajouterDepartement(Departement dep) {

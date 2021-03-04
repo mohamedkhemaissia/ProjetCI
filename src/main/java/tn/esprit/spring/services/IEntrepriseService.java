@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IEntrepriseService {
 
-	int ajouterEntreprise(Entreprise entreprise);
+	void ajouterEntreprise(Entreprise entreprise);
 
 	int ajouterDepartement(Departement dep);
 	void affecterDepartementAEntreprise(int depId, int entrepriseId);

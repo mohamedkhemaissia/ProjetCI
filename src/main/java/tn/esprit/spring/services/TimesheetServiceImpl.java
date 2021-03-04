@@ -27,9 +27,8 @@ public class TimesheetServiceImpl implements ITimesheetService {
 		this.employeRepository = employeRepository;
 	}
 
-	public int ajouterMission(Mission mission) {
+	public void ajouterMission(Mission mission) {
 		missionRepository.save(mission);
-		return mission.getId();
 	}
 
 	public void affecterMissionADepartement(int missionId, int depId) {

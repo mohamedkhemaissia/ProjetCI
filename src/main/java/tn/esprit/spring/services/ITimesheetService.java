@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface ITimesheetService {
 
-	int ajouterMission(Mission mission);
+	void ajouterMission(Mission mission);
 
 	void affecterMissionADepartement(int missionId, int depId);
 

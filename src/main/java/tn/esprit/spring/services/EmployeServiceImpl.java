@@ -27,9 +27,8 @@ public class EmployeServiceImpl implements IEmployeService {
 		this.timesheetRepository = timesheetRepository;
 	}
 
-	public int ajouterEmploye(Employe employe) {
+	public void ajouterEmploye(Employe employe) {
 		employeRepository.save(employe);
-		return employe.getId();
 	}
 
 	public void mettreAjourEmailByEmployeId(String email, int employeId) {
@@ -70,9 +69,8 @@ public class EmployeServiceImpl implements IEmployeService {
 		}
 	}
 
-	public int ajouterContrat(Contrat contrat) {
+	public void ajouterContrat(Contrat contrat) {
 		contratRepoistory.save(contrat);
-		return contrat.getReference();
 	}
 
 	public void affecterContratAEmploye(int contratId, int employeId) {

@@ -26,12 +26,12 @@ node {
     }
 
     stage('Static Code Analysis') {
-     bat  def sonarQube = new SonarCloud(this, [sonarQubeEnv: 'sonarcloud.io-cloudogu'])
+      def sonarQube = new SonarCloud(this, [sonarQubeEnv: 'sonarcloud.io-cloudogu'])
 
-      bat sonarQube.analyzeWith(mvn)
+       sonarQube.analyzeWith(mvn)
 
       if (!sonarQube.waitForQualityGateWebhookToBeCalled()) {
-      bat   currentBuild.result ='UNSTABLE'
+       currentBuild.result ='UNSTABLE'
       }
     }
 

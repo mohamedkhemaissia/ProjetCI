@@ -14,15 +14,15 @@ node {
     initMaven(mvn)
 
     stage('Build') {
-     bat" mvn clean install -DskipTests"
+      mvn 'clean install -DskipTests'
     }
 
     stage('Unit Test') {
-     bat" mvn test"
+      mvn 'test'
     }
 
     stage('Integration Test') {
-     bat" mvn verify -DskipUnitTests "
+      mvn 'verify -DskipUnitTests'
     }
 
     stage('Static Code Analysis') {

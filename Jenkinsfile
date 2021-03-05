@@ -46,7 +46,7 @@ pipeline {
                     bat "mvn clean package"
                     //MVN.run goals: "clean package", pom: "pom.xml", buildInfo: BUILD_INFO
                     //withCredentials([usernamePassword(credentialsId: 'test-creds', variable: 'TOKEN_VAR')]) {
-                    //MVN.run goals: "org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar -Dsonar.host.url=http://localhost:8765 -Dsonar.login=${TOKEN_VAR}", pom: "pom.xml"
+                    //MVN.run goals: "org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar -Dsonar.host.url=http://localhost:9092 -Dsonar.login=${TOKEN_VAR}", pom: "pom.xml"
                     //}
                 }
             }

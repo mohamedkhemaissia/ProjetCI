@@ -28,15 +28,7 @@ node {
 
 
     stage('Deploy') {
-      if (preconditionsForDeploymentFulfilled()) {
-
-        mvn.useDeploymentRepository([id: 'ossrh', url: 'http://localhost:8543/repository/Timesheet-Maven-Repository/',
-                                     credentialsId: 'nexus-credentials', type: 'Nexus2'])
-
-        mvn.setSignatureCredentials('mavenCentral-secretKey-asc-file', 'mavenCentral-secretKey-Passphrase')
-
-        mvn.deployToNexusRepositoryWithStaging()
-      }
+ mvn clean package deploy:deploy-file -DgroupId=tn.esprit.spring -DartifactId=Timesheet-spring-boot-core-data-jpa-mvc-REST-1 -Dversion=0.0.2 -DgeneratePom=true -Dpackaging=war -DrepositoryId=deploymentRepo -Durl=http://localhost:8543/repository/Timesheet-Maven-Repository/ -Dfile=target/Timesheet-spring-boot-core-data-jpa-mvc-REST-1-0.0.2.jar
     }
   }
 

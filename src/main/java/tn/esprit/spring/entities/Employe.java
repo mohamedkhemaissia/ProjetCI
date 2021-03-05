@@ -1,53 +1,65 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by Fernflower decompiler)
+//
+
 package tn.esprit.spring.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Employe implements Serializable {
-
 	private static final long serialVersionUID = -1396669830860400871L;
-
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
-
+	@GeneratedValue(
+			strategy = GenerationType.IDENTITY
+	)
+	private Integer id;
 	private String prenom;
-
 	private String nom;
-
-	//@Column(unique=true)
 	private String email;
-
 	private boolean isActif;
-
 	@Enumerated(EnumType.STRING)
-	//@NotNull
 	private Role role;
-
-	//@JsonBackReference
 	@JsonIgnore
-	@ManyToMany(mappedBy="employes",fetch=FetchType.EAGER )
-	//@NotNull
+	@ManyToMany(
+			mappedBy = "employes",
+			fetch = FetchType.EAGER
+	)
 	private List<Departement> departements;
-
 	@JsonIgnore
-	//@JsonBackReference
-	@OneToOne(mappedBy="employe")
+	@OneToOne(
+			mappedBy = "employe"
+	)
 	private Contrat contrat;
-
 	@JsonIgnore
-	//@JsonBackReference
-	@OneToMany(mappedBy="employe")
+	@OneToMany(
+			mappedBy = "employe"
+	)
 	private List<Timesheet> timesheets;
 
-
 	public Employe() {
-		super();
+	}
+
+	public Employe(Integer id, String prenom, String nom, String email, boolean isActif, Role role) {
+		this.id = id;
+		this.prenom = prenom;
+		this.nom = nom;
+		this.email = email;
+		this.isActif = isActif;
+		this.role = role;
 	}
 
 	public Employe(String nom, String prenom, String email, boolean isActif, Role role) {
@@ -58,8 +70,8 @@ public class Employe implements Serializable {
 		this.role = role;
 	}
 
-	public int getId() {
-		return id;
+	public Integer getId() {
+		return this.id;
 	}
 
 	public void setId(int id) {
@@ -67,7 +79,7 @@ public class Employe implements Serializable {
 	}
 
 	public String getPrenom() {
-		return prenom;
+		return this.prenom;
 	}
 
 	public void setPrenom(String prenom) {
@@ -75,7 +87,7 @@ public class Employe implements Serializable {
 	}
 
 	public String getNom() {
-		return nom;
+		return this.nom;
 	}
 
 	public void setNom(String nom) {
@@ -83,7 +95,7 @@ public class Employe implements Serializable {
 	}
 
 	public String getEmail() {
-		return email;
+		return this.email;
 	}
 
 	public void setEmail(String email) {
@@ -91,7 +103,7 @@ public class Employe implements Serializable {
 	}
 
 	public boolean isActif() {
-		return isActif;
+		return this.isActif;
 	}
 
 	public void setActif(boolean isActif) {
@@ -99,7 +111,7 @@ public class Employe implements Serializable {
 	}
 
 	public Role getRole() {
-		return role;
+		return this.role;
 	}
 
 	public void setRole(Role role) {
@@ -107,7 +119,7 @@ public class Employe implements Serializable {
 	}
 
 	public List<Departement> getDepartements() {
-		return departements;
+		return this.departements;
 	}
 
 	public void setDepartements(List<Departement> departement) {
@@ -115,7 +127,7 @@ public class Employe implements Serializable {
 	}
 
 	public Contrat getContrat() {
-		return contrat;
+		return this.contrat;
 	}
 
 	public void setContrat(Contrat contrat) {
@@ -123,12 +135,10 @@ public class Employe implements Serializable {
 	}
 
 	public List<Timesheet> getTimesheets() {
-		return timesheets;
+		return this.timesheets;
 	}
 
 	public void setTimesheets(List<Timesheet> timesheets) {
 		this.timesheets = timesheets;
 	}
-
-
 }

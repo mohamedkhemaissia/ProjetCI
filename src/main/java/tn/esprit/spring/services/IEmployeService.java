@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface IEmployeService {
 
-	void ajouterEmploye(Employe employe);
+	Employe ajouterEmploye(Employe employe);
 
 	void mettreAjourEmailByEmployeId(String email, int employeId);
 

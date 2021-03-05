@@ -27,9 +27,10 @@ public class EmployeServiceImpl implements IEmployeService {
 		this.timesheetRepository = timesheetRepository;
 	}
 
-	public void ajouterEmploye(Employe employe) {
+	public Employe ajouterEmploye(Employe employe) {
 		employeRepository.save(employe);
-	}
+        return employe;
+    }
 
 	public void mettreAjourEmailByEmployeId(String email, int employeId) {
 		Employe employe = employeRepository.findById(employeId).get();

@@ -25,15 +25,7 @@ node {
      bat " mvn  verify -DskipUnitTests "
     }
 
-    stage('Static Code Analysis') {
-      def sonarQube = new SonarCloud(this, [sonarQubeEnv: 'sonarcloud.io-cloudogu'])
 
-       sonarQube.analyzeWith(mvn)
-
-      if (!sonarQube.waitForQualityGateWebhookToBeCalled()) {
-       currentBuild.result ='UNSTABLE'
-      }
-    }
 
     stage('Deploy') {
       if (preconditionsForDeploymentFulfilled()) {

@@ -25,7 +25,9 @@ node {
      bat " mvn  verify -DskipUnitTests "
     }
 
-
+    stage('Static Code Analysis') {
+     bat " mvn sonar:sonar -Dsonar.projectKey=CIpipeline -Dsonar.host.url=http://localhost:9000 -Dsonar.login=d30c7ab257dbb2f0504d86281f785d81bd9ffce0 "
+    }
 
     stage('Deploy') {
  bat " mvn clean package deploy:deploy-file -DgroupId=tn.esprit.spring -DartifactId=Timesheet-spring-boot-core-data-jpa-mvc-REST-1 -Dversion=0.0.2 -DgeneratePom=true -Dpackaging=war -DrepositoryId=deploymentRepo -Durl=http://localhost:8543/repository/Timesheet-Maven-Repository/ -Dfile=target/Timesheet-spring-boot-core-data-jpa-mvc-REST-1-0.0.2.jar"

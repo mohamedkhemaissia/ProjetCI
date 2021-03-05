@@ -24,14 +24,6 @@ pipeline {
     }
        
     stages {
-       stage("Building SONAR ...") {
-        
-           steps {
-                script {
-            sh './gradlew clean sonarqube'
-            }
-             }
-       }
         
         stage("clone code") {
             steps {

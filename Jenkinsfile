@@ -15,7 +15,7 @@ pipeline {
         // This can be http or https
         NEXUS_PROTOCOL = "http"
         // Where your Nexus is running
-        NEXUS_URL = "/localhost:8543"
+        NEXUS_URL = "localhost:8543"
         // Repository where we will upload the artifact
         NEXUS_REPOSITORY = "Timesheet-Maven-Repository"
         // Jenkins credential id to authenticate to Nexus OSS
@@ -65,7 +65,7 @@ pipeline {
                             nexusUrl: NEXUS_URL,
                             groupId: pom.groupId,
                             version: pom.version,
-                            repository: NEXUS_REPOSITORY,
+                            repository: deploymentRepo,
                             credentialsId: NEXUS_CREDENTIAL_ID,
                             artifacts: [
                                 // Artifact generated such as .jar, .ear and .war files.

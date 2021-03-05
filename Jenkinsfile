@@ -22,8 +22,12 @@ pipeline {
         // Jenkins credential id to authenticate to Nexus OSS
         NEXUS_CREDENTIAL_ID = "nexus-credentials"
     }
-
+       
     stages {
+       stage("Building SONAR ...") {
+            sh './gradlew clean sonarqube'
+            }
+        
         stage("clone code") {
             steps {
                 script {

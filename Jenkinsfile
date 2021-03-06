@@ -7,7 +7,6 @@ pipeline {
 
     node {
 
-  Maven mvn = new MavenWrapper(this)
 
   catchError {
 

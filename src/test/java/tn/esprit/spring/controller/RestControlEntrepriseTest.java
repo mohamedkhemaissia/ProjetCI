@@ -2,7 +2,6 @@ package tn.esprit.spring.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -15,16 +14,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.entities.Entreprise;
-import tn.esprit.spring.entities.Role;
 import tn.esprit.spring.services.IEmployeService;
 import tn.esprit.spring.services.IEntrepriseService;
 import tn.esprit.spring.services.ITimesheetService;
-
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -45,10 +38,6 @@ class RestControlEntrepriseTest {
         Entreprise mockEntreprise2 = new Entreprise("Ci Devops","raisonSocial");
         Entreprise ent = ((IEntrepriseService)Mockito.doReturn(mockEntreprise2).when(this.ientrepriseservice)).ajouterEntreprise((Entreprise) Mockito.any());
         this.mockMvc.perform(MockMvcRequestBuilders.post("/ajouterEntreprise", new Object[0]).contentType(MediaType.APPLICATION_JSON).content(Utils.toJsonString(mockEntreprise))).andExpect(MockMvcResultMatchers.status().isOk());
-
-
-
-
 
     }
     @Test

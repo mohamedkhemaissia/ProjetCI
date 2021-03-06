@@ -33,33 +33,8 @@ node {
  bat " mvn clean package deploy:deploy-file -DgroupId=tn.esprit.spring -DartifactId=Timesheet-spring-boot-core-data-jpa-mvc-REST-1 -Dversion=0.0.2 -DgeneratePom=true -Dpackaging=war -DrepositoryId=deploymentRepo -Durl=http://localhost:8543/repository/Timesheet-Maven-Repository/ -Dfile=target/Timesheet-spring-boot-core-data-jpa-mvc-REST-1-0.0.2.jar"
     }
   }
-
-  junit allowEmptyResults: true, testResults: '**/target/surefire-reports/TEST-*.xml, **/target/failsafe-reports/*.xml'
-
-  mailIfStatusChanged(new Git(this).commitAuthorEmail)
 }
 
-boolean preconditionsForDeploymentFulfilled() {
-  if (isBuildSuccessful() &&
-      !isPullRequest() &&
-      shouldBranchBeDeployed()) {
-    return true
-  } else {
-    echo "Skipping deployment because of branch or build result: currentResult=${currentBuild.currentResult}, " +
-      "result=${currentBuild.result}, branch=${env.BRANCH_NAME}."
-    return false
-  }
-}
-
-private boolean shouldBranchBeDeployed() {
-  return env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'develop'
-}
-
-private boolean isBuildSuccessful() {
-  currentBuild.currentResult == 'SUCCESS' &&
-    // Build result == SUCCESS seems not to set be during pipeline execution.
-    (currentBuild.result == null || currentBuild.result == 'SUCCESS')
-}
 
 void initMaven(Maven mvn) {
 

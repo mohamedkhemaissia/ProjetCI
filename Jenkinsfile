@@ -11,7 +11,6 @@ node {
       checkout scm
     }
 
-    initMaven(mvn)
 
     stage('Build') {
      bat " mvn clean install -DskipTests "
@@ -35,13 +34,3 @@ node {
   }
 }
 
-
-void initMaven(Maven mvn) {
-
-  if ("master".equals(env.BRANCH_NAME)) {
-
-    echo "Building master branch"
-    mvn.additionalArgs = "-DperformRelease"
-    currentBuild.description = mvn.getVersion()
-  }
-}

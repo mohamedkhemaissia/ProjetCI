@@ -26,7 +26,7 @@ node {
     }
 
     stage('Static Code Analysis') {
-     bat " mvn sonar:sonar -Dsonar.projectKey=CIpipeline -Dsonar.host.url=http://localhost:9000 -Dsonar.login=52356a06932b155a00ba0b5c3ed232a6669f16a4 "
+     bat " mvn sonar:sonar -Dsonar.projectKey=CIpipeline -Dsonar.host.url=http://localhost:9000 -Dsonar.login=99c92e2c8e8c02b215f51c3003603cb40a25e3cb "
     }
 
     stage('Deploy') {

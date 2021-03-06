@@ -61,3 +61,12 @@ private boolean isBuildSuccessful() {
     (currentBuild.result == null || currentBuild.result == 'SUCCESS')
 }
 
+void initMaven(Maven mvn) {
+
+  if ("master".equals(env.BRANCH_NAME)) {
+
+    echo "Building master branch"
+    mvn.additionalArgs = "-DperformRelease"
+    currentBuild.description = mvn.getVersion()
+  }
+}

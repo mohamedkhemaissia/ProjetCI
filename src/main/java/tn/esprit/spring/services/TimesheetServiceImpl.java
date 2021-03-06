@@ -10,7 +10,8 @@ import tn.esprit.spring.repository.TimesheetRepository;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 @Service
 public class TimesheetServiceImpl implements ITimesheetService {
 
@@ -19,6 +20,7 @@ public class TimesheetServiceImpl implements ITimesheetService {
 	private final DepartementRepository deptRepoistory;
 	private final TimesheetRepository timesheetRepository;
 	private final EmployeRepository employeRepository;
+	private static final  Logger log = LogManager.getLogger(EmployeServiceImpl.class);
 
 	public TimesheetServiceImpl(MissionRepository missionRepository, DepartementRepository deptRepoistory, TimesheetRepository timesheetRepository, EmployeRepository employeRepository) {
 		this.missionRepository = missionRepository;
@@ -36,6 +38,7 @@ public class TimesheetServiceImpl implements ITimesheetService {
 		Departement dep = deptRepoistory.findById(depId).get();
 		mission.setDepartement(dep);
 		missionRepository.save(mission);
+		log.info("Mission affectee ");
 
 	}
 
@@ -50,6 +53,7 @@ public class TimesheetServiceImpl implements ITimesheetService {
 		timesheet.setTimesheetPK(timesheetPK);
 		timesheet.setValide(false); //par defaut non valide
 		timesheetRepository.save(timesheet);
+		log.info("TimeSheet ajouté");
 
 	}
 
@@ -72,7 +76,7 @@ public class TimesheetServiceImpl implements ITimesheetService {
 			}
 		}
 		if(!chefDeLaMission){
-			System.out.println("l'employe doit etre chef de departement de la mission en question");
+			log.warn("l'employe doit etre chef de departement de la mission en question");
 			return;
 		}
 //

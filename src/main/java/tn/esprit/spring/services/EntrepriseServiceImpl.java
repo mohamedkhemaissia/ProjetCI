@@ -9,25 +9,32 @@ import tn.esprit.spring.repository.EntrepriseRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 @Service
 public class EntrepriseServiceImpl implements IEntrepriseService {
 
 	private final EntrepriseRepository enterpriseRepository;
 	private final DepartementRepository deptRepository;
+	private static final  Logger log = LogManager.getLogger(EmployeServiceImpl.class);
+
 
 	public EntrepriseServiceImpl(DepartementRepository deptRepository, EntrepriseRepository enterpriseRepository) {
 		this.deptRepository = deptRepository;
 		this.enterpriseRepository = enterpriseRepository;
+
 	}
 
 	public Entreprise ajouterEntreprise(Entreprise entreprise) {
 		enterpriseRepository.save(entreprise);
+		log.info("entreprise added ");
         return entreprise;
-    }
+
+	}
 
 	public int ajouterDepartement(Departement dep) {
 		deptRepository.save(dep);
+		log.info("department added ");
 		return dep.getId();
 	}
 
@@ -58,6 +65,7 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 	@Transactional
 	public void deleteEntrepriseById(int entrepriseId) {
 		enterpriseRepository.delete(enterpriseRepository.findById(entrepriseId).get());
+		log.info("entreprise deleted ");
 	}
 
 	@Transactional
@@ -67,6 +75,7 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 
 
 	public Entreprise getentreprisebyid(int enterpriseId) {
+		log.info("entreprise trouvée");
 		return enterpriseRepository.findById(enterpriseId).get();
 	}
 

@@ -11,6 +11,8 @@ import tn.esprit.spring.repository.TimesheetRepository;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 @Service
 public class EmployeServiceImpl implements IEmployeService {
@@ -19,6 +21,8 @@ public class EmployeServiceImpl implements IEmployeService {
 	private final DepartementRepository deptRepoistory;
 	private final ContratRepository contratRepoistory;
 	private final TimesheetRepository timesheetRepository;
+	private static final  Logger log = LogManager.getLogger(EmployeServiceImpl.class);
+
 
 	public EmployeServiceImpl(EmployeRepository employeRepository, DepartementRepository deptRepoistory, ContratRepository contratRepoistory, TimesheetRepository timesheetRepository) {
 		this.employeRepository = employeRepository;
@@ -29,14 +33,16 @@ public class EmployeServiceImpl implements IEmployeService {
 
 	public Employe ajouterEmploye(Employe employe) {
 		employeRepository.save(employe);
-        return employe;
+		log.info("Employé ajouté avec succes ");
+		return employe;
+
     }
 
 	public void mettreAjourEmailByEmployeId(String email, int employeId) {
 		Employe employe = employeRepository.findById(employeId).get();
 		employe.setEmail(email);
 		employeRepository.save(employe);
-
+		log.info("mail m.a.j avec succes ");
 	}
 
 	@Transactional
